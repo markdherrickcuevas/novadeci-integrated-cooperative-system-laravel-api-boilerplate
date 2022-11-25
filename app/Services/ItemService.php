@@ -4,36 +4,33 @@
 namespace App\Services;
 
 use App\Models\Item;
+use App\Traits\ApiResponses;
 use App\Http\Resources\ItemResource;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\Item\StoreItemRequest;
-use App\Http\Requests\Item\UpdateItemRequest;
-use App\Traits\ApiResponses;
+use App\Http\Resources\ItemCollection;
+use App\Http\Requests\Item\StoreRequest;
+use App\Http\Requests\Item\UpdateRequest;
 
 class ItemService
 {
     use ApiResponses;
 
-    public function getAll()
+    public function __construct(Item $item)
     {
-        return ItemResource::collection(
-            Item::where('user_id', Auth::user()->id)->get()
-        );
+        $this->item = $item;
     }
 
-    public function getById(Item $item)
+    public function getAll(): ItemCollection
+    {
+        return new ItemCollection($this->item->where('user_id', Auth::user()->id)->get());
+    }
+
+    public function getById(Item $item): ItemResource
     {
         return new ItemResource($item);
     }
 
-    public static function getItems()
-    {
-        return ItemResource::collection(
-            Item::where('user_id', Auth::user()->id)->get()
-        );
-    }
-
-    public static function saveItem(StoreItemRequest $request)
+    public static function saveItem(StoreRequest $request): ItemResource
     {
         $request->validated();
 
@@ -46,7 +43,7 @@ class ItemService
         return new ItemResource($item);
     }
 
-    public static function updateItem(UpdateItemRequest $request, Item $item)
+    public static function updateItem(UpdateRequest $request, Item $item): ItemResource
     {
         if (Auth::user()->id !== $item->user_id) {
             return self::unauthorizedResponse('', 'You are not authorized to update this item.');
@@ -57,14 +54,14 @@ class ItemService
         return new ItemResource($item);
     }
 
-    public static function deleteItem(Item $item)
+    public static function deleteItem(Item $item): void
     {
         return self::checkIfUserIsAuthorized($item) ? self::checkIfUserIsAuthorized($item) : $item->delete();
     }
 
-    private static function checkIfUserIsAuthorized($task)
+    private static function checkIfUserIsAuthorized($item)
     {
-        if (Auth::user()->id !== $task->user_id) {
+        if (Auth::user()->id !== $item->user_id) {
             return self::unauthorizedResponse('', 'You are not authorized to make this request');
         }
     }
