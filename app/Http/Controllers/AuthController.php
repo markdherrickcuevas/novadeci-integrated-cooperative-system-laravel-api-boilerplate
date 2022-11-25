@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\LoginUserRequest;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Models\User;
-use App\Traits\HttpResponses;
+use App\Traits\ApiResponses;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    use HttpResponses;
+    use ApiResponses;
 
     public function login(LoginUserRequest $request)
     {

@@ -2,14 +2,16 @@
 
 namespace App\Exceptions;
 
-use App\Traits\ApiResponses;
+use Exception;
 use Throwable;
+use App\Traits\ApiResponses;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
     use ApiResponses;
+
     /**
      * A list of exception types with their corresponding custom log levels.
      *
@@ -48,6 +50,12 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            if ($request->is('api/*')) {
+                return self::notFoundResponse('', 'Record not found.');
+            }
         });
     }
 }

@@ -28,5 +28,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/{item}', [ItemController::class, 'update'])->name('items.update');
         Route::delete('/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
     });
-
 });
