@@ -21,8 +21,8 @@ return new class extends Migration
                 ->on('employees')
                 ->onDelete('cascade');
             $table->string('type', 255);
-            $table->dateTime('date_from', 255);
-            $table->dateTime('date_to', 255);
+            $table->dateTime('date_from');
+            $table->dateTime('date_to');
             $table->string('reason', 255);
             $table->string('status', 255);
             $table->string('is_paid_leave', 255);

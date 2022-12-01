@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('department_id');
             $table->integer('position_id');
             $table->integer('rank_id');
-            $table->date('license_expiration_date');
+            $table->date('effective_date');
             $table->integer('immediate_supervisor');
             $table->timestamp('created_at');
             $table->string('created_by', 255);
@@ -28,6 +28,10 @@ return new class extends Migration
             $table->string('updated_by', 255);
             $table->timestamp('deleted_at');
             $table->string('deleted_by', 255);
+            $table->foreign('employee_id')
+                ->references('employee_id')
+                ->on('employees')
+                ->onDelete('cascade');
             $table->foreign('employment_status')
                 ->references('id')
                 ->on('employment_status')
