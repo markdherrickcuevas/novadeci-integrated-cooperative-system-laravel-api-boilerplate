@@ -15,7 +15,15 @@ return new class extends Migration
     {
         Schema::create('ranks', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('code', 255);
+            $table->string('description', 255);
+            $table->string('level', 255);
+            $table->timestamp('created_at');
+            $table->string('created_by', 255);
+            $table->timestamp('updated_at');
+            $table->string('updated_by', 255);
+            $table->timestamp('deleted_at');
+            $table->string('deleted_by', 255);
         });
     }
 

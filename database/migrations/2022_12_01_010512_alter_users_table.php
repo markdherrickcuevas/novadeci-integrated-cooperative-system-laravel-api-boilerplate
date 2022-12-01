@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        
         Schema::table('users', function (Blueprint $table) {
-            // Add Foreign Key column named employee_id from employee table
-            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->unsignedBigInteger('employee_id')->after('password');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        
     }
 };
