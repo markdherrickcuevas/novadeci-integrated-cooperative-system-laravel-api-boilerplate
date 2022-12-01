@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('employment_history', function (Blueprint $table) {
             $table->id();
             $table->string('employee_id', 255)->unique();
-            $table->integer('employment_status');
-            $table->integer('department_id');
-            $table->integer('position_id');
-            $table->integer('rank_id');
+            $table->unsignedBigInteger('employment_status');
+            $table->unsignedBigInteger('department_id');
+            $table->unsignedBigInteger('position_id');
+            $table->unsignedBigInteger('rank_id');
             $table->date('effective_date');
-            $table->integer('immediate_supervisor');
+            $table->unsignedBigInteger('immediate_supervisor');
             $table->timestamp('created_at');
             $table->string('created_by', 255);
             $table->timestamp('updated_at');
