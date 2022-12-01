@@ -15,7 +15,23 @@ return new class extends Migration
     {
         Schema::create('leaves', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('employee_id', 255)->unique();
+            $table->foreign('employee_id')
+                ->references('employee_id')
+                ->on('employees')
+                ->onDelete('cascade');
+            $table->string('type', 255);
+            $table->dateTime('date_from');
+            $table->dateTime('date_to');
+            $table->string('reason', 255);
+            $table->string('status', 255);
+            $table->string('is_paid_leave', 255);
+            $table->timestamp('created_at');
+            $table->string('created_by', 255);
+            $table->timestamp('updated_at');
+            $table->string('updated_by', 255);
+            $table->timestamp('deleted_at');
+            $table->string('deleted_by', 255);
         });
     }
 

@@ -15,7 +15,14 @@ return new class extends Migration
     {
         Schema::create('employees_children', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('employee_id', 255)->unique();
+            $table->string('childs_name', 255);
+            $table->timestamp('created_at');
+            $table->string('created_by', 255);
+            $table->timestamp('updated_at');
+            $table->string('updated_by', 255);
+            $table->timestamp('deleted_at');
+            $table->string('deleted_by', 255);
         });
     }
 
