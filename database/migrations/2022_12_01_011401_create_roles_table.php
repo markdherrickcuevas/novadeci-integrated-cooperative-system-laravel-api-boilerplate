@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('created_by', 255);
             $table->timestamp('updated_at');
             $table->string('updated_by', 255);
-            $table->timestamp('deleted_at');
+            $table->softDeletes('deleted_at');
             $table->string('deleted_by', 255);
         });
     }
