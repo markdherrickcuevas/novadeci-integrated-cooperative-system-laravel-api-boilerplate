@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
             $table->string('code', 255)->unique();
-            $table->string('description')->unique();
+            $table->string('description');
             $table->timestamp('created_at');
             $table->string('created_by', 255);
             $table->timestamp('updated_at');

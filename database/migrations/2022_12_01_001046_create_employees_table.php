@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('religion', 255);
             $table->string('email', 255);
             $table->string('mobile', 11);
-            $table->enum('civil_status', ['single', 'married', 'separated', 'widowed']);
+            $table->enum('civil_status', ['single', 'married', 'separated', 'widowed'])->nullable(false);
             $table->string('name_of_spouse', 255)->nullable();
             $table->integer('total_num_of_children')->nullable();
             $table->string('blood_type', 255);
