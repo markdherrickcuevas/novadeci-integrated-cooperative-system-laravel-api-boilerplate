@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('employee', function (Blueprint $table) {
             // Add Foreign Key column named employee_id from employee table
             $table->foreign('employee_id')->references('id')->on('employee');
-        }
+        });
     }
 
     /**
