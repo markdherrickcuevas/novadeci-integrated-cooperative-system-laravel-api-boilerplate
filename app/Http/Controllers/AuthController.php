@@ -15,13 +15,13 @@ class AuthController extends Controller
 
     public function login(LoginUserRequest $request)
     {
-        $request->validated($request->only(['email', 'password']));
+        $request->validated($request->only(['username', 'password']));
 
-        if (!Auth::attempt($request->only(['email', 'password']))) {
+        if (!Auth::attempt($request->only(['username', 'password']))) {
             return $this->error('', 'Credentials do not match', 401);
         }
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('username', $request->username)->first();
 
         return $this->success([
             'user' => $user,
@@ -31,11 +31,11 @@ class AuthController extends Controller
 
     public function register(StoreUserRequest $request)
     {
-        $request->validated($request->only(['name', 'email', 'password']));
+        $request->validated($request->only(['name', 'username', 'password']));
 
         $user = User::create([
             'name' => $request->name,
-            'email' => $request->email,
+            'username' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 

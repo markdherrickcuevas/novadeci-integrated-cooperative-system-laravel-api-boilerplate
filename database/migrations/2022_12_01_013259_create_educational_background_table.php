@@ -13,20 +13,23 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('educational_background', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('username')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('status', 255);
-            $table->rememberToken();
+            $table->string('employee_id', 255)->unique();
+            $table->enum('educational_attainment', ['Highschool', 'Undergraduate', 'Graduate', 'Masters Degree', 'Post Graduate Study'])->nullable(false)->change();
+            $table->string('license_title', 255);
+            $table->date('license_expiration_date');
+            $table->string('other_skills', 255);
             $table->timestamp('created_at');
             $table->string('created_by', 255);
             $table->timestamp('updated_at');
             $table->string('updated_by', 255);
             $table->softDeletes('deleted_at');
             $table->string('deleted_by', 255);
+            $table->foreign('employee_id')
+                ->references('employee_id')
+                ->on('employees')
+                ->onDelete('cascade');
         });
     }
 
@@ -37,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('educational_background');
     }
 };
