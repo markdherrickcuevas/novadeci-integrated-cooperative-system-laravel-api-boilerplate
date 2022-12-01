@@ -20,8 +20,8 @@ return new class extends Migration
                 ->references('employee_id')
                 ->on('employees')
                 ->onDelete('cascade');
-            $table->dateTime('date_from', 255);
-            $table->dateTime('date_to', 255);
+            $table->dateTime('date_from');
+            $table->dateTime('date_to');
             $table->string('reason', 255);
             $table->integer('approved_by');
             $table->timestamp('created_at');
