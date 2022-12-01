@@ -15,7 +15,20 @@ return new class extends Migration
     {
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('employee_id', 255)->unique();
+            $table->string('description', 255);
+            $table->dateTime('attended_from');
+            $table->dateTime('attended_to');
+            $table->timestamp('created_at');
+            $table->string('created_by', 255);
+            $table->timestamp('updated_at');
+            $table->string('updated_by', 255);
+            $table->timestamp('deleted_at');
+            $table->string('deleted_by', 255);
+            $table->foreign('employee_id')
+                    ->references('employee_id')
+                    ->on('employees')
+                    ->onDelete('cascade');
         });
     }
 
