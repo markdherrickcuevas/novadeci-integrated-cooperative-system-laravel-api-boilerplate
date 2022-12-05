@@ -38,7 +38,7 @@ class ItemController extends Controller
         return $this->itemService->updateItem($request, $item);
     }
 
-    public function destroy(Item $item): void
+    public function destroy(Item $item)
     {
         return $this->itemService->deleteItem($item);
     }

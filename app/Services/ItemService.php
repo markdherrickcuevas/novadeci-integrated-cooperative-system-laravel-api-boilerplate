@@ -54,7 +54,7 @@ class ItemService
         return new ItemResource($item);
     }
 
-    public function deleteItem(Item $item): void
+    public function deleteItem(Item $item)
     {
         return $this->checkIfUserIsAuthorized($item) ? $this->checkIfUserIsAuthorized($item) : $item->delete();
     }
