@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('firstname', 255);
             $table->string('middlename', 255);
             $table->string('lastname', 255);
-            $table->string('suffix', 10);
+            $table->string('suffix', 10)->nullable();
             $table->string('nickname', 255);
             $table->date('dob');
             $table->string('gender', 255);
@@ -36,12 +36,12 @@ return new class extends Migration
             $table->string('sss_no', 255);
             $table->string('tin_no', 255);
             $table->string('philhealth_no', 255);
-            $table->timestamp('created_at');
-            $table->string('created_by', 255);
-            $table->timestamp('updated_at');
-            $table->string('updated_by', 255);
+            $table->timestamp('created_at')->useCurrent();
+            $table->string('created_by', 255)->nullable();
+            $table->timestamp('updated_at')->nullable();
+            $table->string('updated_by', 255)->nullable();
             $table->softDeletes('deleted_at');
-            $table->string('deleted_by', 255);
+            $table->string('deleted_by', 255)->nullable();
         });
     }
 

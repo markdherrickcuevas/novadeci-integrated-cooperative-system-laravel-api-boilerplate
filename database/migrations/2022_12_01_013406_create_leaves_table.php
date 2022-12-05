@@ -26,12 +26,13 @@ return new class extends Migration
             $table->string('reason', 255);
             $table->string('status', 255);
             $table->string('is_paid_leave', 255);
-            $table->timestamp('created_at');
-            $table->string('created_by', 255);
-            $table->timestamp('updated_at');
-            $table->string('updated_by', 255);
+            
+            $table->timestamp('created_at')->useCurrent();
+            $table->string('created_by', 255)->nullable();
+            $table->timestamp('updated_at')->nullable();
+            $table->string('updated_by', 255)->nullable();
             $table->softDeletes('deleted_at');
-            $table->string('deleted_by', 255);
+            $table->string('deleted_by', 255)->nullable();
         });
     }
 

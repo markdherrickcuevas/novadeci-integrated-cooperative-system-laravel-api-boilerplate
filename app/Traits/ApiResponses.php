@@ -14,7 +14,7 @@ trait ApiResponses
      * @param  int  $statusCode
      * @return JsonResponse
      */
-    public static function success(mixed $data, int $statusCode = Response::HTTP_OK): JsonResponse
+    public function success(mixed $data, int $statusCode = Response::HTTP_OK): JsonResponse
     {
         return new JsonResponse($data, $statusCode);
     }
@@ -27,7 +27,7 @@ trait ApiResponses
      * @param  int  $statusCode
      * @return JsonResponse
      */
-    public static function error(mixed $data, string $message = '', int $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR): JsonResponse
+    public function error(mixed $data, string $message = '', int $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR): JsonResponse
     {
         if (!$message) {
             $message = Response::$statusTexts[$statusCode];
@@ -47,9 +47,9 @@ trait ApiResponses
      * @param  mixed  $data
      * @return JsonResponse
      */
-    public static function okResponse(mixed $data): JsonResponse
+    public function okResponse(mixed $data): JsonResponse
     {
-        return self::success($data);
+        return $this->success($data);
     }
 
     /**
@@ -58,9 +58,9 @@ trait ApiResponses
      * @param  mixed  $data
      * @return JsonResponse
      */
-    public static function createdResponse(mixed $data): JsonResponse
+    public function createdResponse(mixed $data): JsonResponse
     {
-        return self::success($data, Response::HTTP_CREATED);
+        return $this->success($data, Response::HTTP_CREATED);
     }
 
     /**
@@ -68,9 +68,9 @@ trait ApiResponses
      *
      * @return JsonResponse
      */
-    public static function noContentResponse(): JsonResponse
+    public function noContentResponse(): JsonResponse
     {
-        return self::success([], Response::HTTP_NO_CONTENT);
+        return $this->success([], Response::HTTP_NO_CONTENT);
     }
 
     /**
@@ -80,9 +80,9 @@ trait ApiResponses
      * @param  string  $message
      * @return JsonResponse
      */
-    public static function badRequestResponse(mixed $data, string $message = ''): JsonResponse
+    public function badRequestResponse(mixed $data, string $message = ''): JsonResponse
     {
-        return self::error($data, $message, Response::HTTP_BAD_REQUEST);
+        return $this->error($data, $message, Response::HTTP_BAD_REQUEST);
     }
 
     /**
@@ -92,9 +92,9 @@ trait ApiResponses
      * @param  string  $message
      * @return JsonResponse
      */
-    public static function unauthorizedResponse(mixed $data, string $message = ''): JsonResponse
+    public function unauthorizedResponse(mixed $data, string $message = ''): JsonResponse
     {
-        return self::error($data, $message, Response::HTTP_UNAUTHORIZED);
+        return $this->error($data, $message, Response::HTTP_UNAUTHORIZED);
     }
 
     /**
@@ -104,9 +104,9 @@ trait ApiResponses
      * @param  string  $message
      * @return JsonResponse
      */
-    public static function forbiddenResponse(mixed $data, string $message = ''): JsonResponse
+    public function forbiddenResponse(mixed $data, string $message = ''): JsonResponse
     {
-        return self::error($data, $message, Response::HTTP_FORBIDDEN);
+        return $this->error($data, $message, Response::HTTP_FORBIDDEN);
     }
 
     /**
@@ -116,9 +116,9 @@ trait ApiResponses
      * @param  string  $message
      * @return JsonResponse
      */
-    public static function notFoundResponse(mixed $data, string $message = ''): JsonResponse
+    public function notFoundResponse(mixed $data, string $message = ''): JsonResponse
     {
-        return self::error($data, $message, Response::HTTP_NOT_FOUND);
+        return $this->error($data, $message, Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -128,9 +128,9 @@ trait ApiResponses
      * @param  string  $message
      * @return JsonResponse
      */
-    public static function conflictResponse(mixed $data, string $message = ''): JsonResponse
+    public function conflictResponse(mixed $data, string $message = ''): JsonResponse
     {
-        return self::error($data, $message, Response::HTTP_CONFLICT);
+        return $this->error($data, $message, Response::HTTP_CONFLICT);
     }
 
     /**
@@ -140,8 +140,8 @@ trait ApiResponses
      * @param  string  $message
      * @return JsonResponse
      */
-    public static function unprocessableResponse(mixed $data, string $message = ''): JsonResponse
+    public function unprocessableResponse(mixed $data, string $message = ''): JsonResponse
     {
-        return self::error($data, $message, Response::HTTP_UNPROCESSABLE_ENTITY);
+        return $this->error($data, $message, Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

@@ -30,7 +30,7 @@ class ItemService
         return new ItemResource($item);
     }
 
-    public static function saveItem(StoreRequest $request): ItemResource
+    public function saveItem(StoreRequest $request): ItemResource
     {
         $request->validated();
 
@@ -43,10 +43,10 @@ class ItemService
         return new ItemResource($item);
     }
 
-    public static function updateItem(UpdateRequest $request, Item $item): ItemResource
+    public function updateItem(UpdateRequest $request, Item $item): ItemResource
     {
         if (Auth::user()->id !== $item->user_id) {
-            return self::unauthorizedResponse('', 'You are not authorized to update this item.');
+            return $this->unauthorizedResponse('', 'You are not authorized to update this item.');
         }
 
         $item->update($request->all());
@@ -54,15 +54,15 @@ class ItemService
         return new ItemResource($item);
     }
 
-    public static function deleteItem(Item $item): void
+    public function deleteItem(Item $item): void
     {
-        return self::checkIfUserIsAuthorized($item) ? self::checkIfUserIsAuthorized($item) : $item->delete();
+        return $this->checkIfUserIsAuthorized($item) ? $this->checkIfUserIsAuthorized($item) : $item->delete();
     }
 
-    private static function checkIfUserIsAuthorized($item)
+    private function checkIfUserIsAuthorized($item)
     {
         if (Auth::user()->id !== $item->user_id) {
-            return self::unauthorizedResponse('', 'You are not authorized to make this request');
+            return $this->unauthorizedResponse('', 'You are not authorized to make this request');
         }
     }
 }

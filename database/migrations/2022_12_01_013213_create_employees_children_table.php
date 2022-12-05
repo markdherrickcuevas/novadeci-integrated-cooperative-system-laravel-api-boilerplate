@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('employees_children', function (Blueprint $table) {
             $table->id();
-            $table->string('employee_id', 255)->unique();
+
+            $table->unsignedBigInteger('employee_id');
+            $table->foreign('employee_id')->references('id')->on('employees');
+
             $table->string('childs_name', 255);
             $table->timestamp('created_at');
             $table->string('created_by', 255);

@@ -27,7 +27,7 @@ class ItemResource extends JsonResource
             'user' => [
                 'id' => (string)$this->user->id,
                 'name' => $this->user->name,
-                'email' => $this->user->email
+                'username' => $this->user->username
             ]
         ];
     }
